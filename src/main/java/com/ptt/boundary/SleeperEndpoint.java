@@ -2,6 +2,7 @@ package com.ptt.boundary;
 
 import com.ptt.service.AuthService;
 import io.smallrye.mutiny.Uni;
+import io.smallrye.mutiny.infrastructure.Infrastructure;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -22,7 +23,7 @@ public class SleeperEndpoint {
     @Path("/{sessionToken}/{seconds}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Response> sleepForSeconds(@PathParam("sessionToken") String sessionToken,
-                                         @PathParam("seconds") String seconds) {
+                                         @PathParam("seconds") int seconds) {
         return this.service
                 .isLoggedIn(sessionToken)
                 .onItem()
@@ -37,6 +38,6 @@ public class SleeperEndpoint {
                     }
 
                     return Response.ok().build();
-                });
+                }).runSubscriptionOn(Infrastructure.getDefaultWorkerPool());
     }
 }

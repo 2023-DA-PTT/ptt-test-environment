@@ -2,6 +2,7 @@ package com.ptt.service;
 
 import com.ptt.entity.Session;
 import com.ptt.entity.User;
+import io.quarkus.scheduler.Scheduled;
 import io.smallrye.mutiny.Uni;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -42,5 +43,14 @@ public class AuthService {
     public Uni<Boolean> isLoggedIn(String sessionToken) {
         return Uni.createFrom()
                 .item(validTokens.stream().anyMatch(s -> s.token().toString().equals(sessionToken)));
+    }
+
+    /**
+     * Wipe testing data every 2 hours for minimal resource consumption
+     */
+    @Scheduled(cron = "* 0 * ? * * *")
+    public void wipeTestData() {
+        this.users.clear();
+        this.validTokens.clear();
     }
 }

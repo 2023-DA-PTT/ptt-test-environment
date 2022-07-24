@@ -2,10 +2,12 @@ package com.ptt.service;
 
 
 import io.quarkus.test.junit.QuarkusTest;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
@@ -20,7 +22,7 @@ public class AuthServiceTest {
     public void basicTest() {
         service.signUp(USERNAME, PASSWORD).subscribe().with(user -> {
            service.login(USERNAME, PASSWORD).subscribe().with(optSession -> {
-             assertTrue(optSession.isPresent());
+               assertThat(optSession.isPresent(), Matchers.is(true));
            });
         });
     }
@@ -29,7 +31,7 @@ public class AuthServiceTest {
     public void failingTest() {
         service.signUp(USERNAME, PASSWORD).subscribe().with(user -> {
             service.login(USERNAME, "wrongPassword").subscribe().with(optSession -> {
-                assertTrue(optSession.isEmpty());
+                assertThat(optSession.isEmpty(), Matchers.is(true));
             });
         });
     }
