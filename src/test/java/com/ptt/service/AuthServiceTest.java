@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 public class AuthServiceTest {
