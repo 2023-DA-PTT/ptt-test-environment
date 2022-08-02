@@ -23,7 +23,7 @@ public class SignUpEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Uni<Response> signUp(User dto) {
-        return this.service.signUp(dto.username(), dto.password())
+        return this.service.signUp(dto.getUsername(), dto.getPassword())
                 .onItem().transform(user -> Response.ok(user).build());
     }
 }

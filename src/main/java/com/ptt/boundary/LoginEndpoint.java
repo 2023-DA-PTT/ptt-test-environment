@@ -23,7 +23,7 @@ public class LoginEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Uni<Response> login(User user) {
-        return service.login(user.username(), user.password())
+        return service.login(user.getUsername(), user.getPassword())
                 .onItem()
                 .transform(
                         token -> token.isPresent()

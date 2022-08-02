@@ -31,7 +31,7 @@ public class AuthService {
 
     public Uni<Optional<Session>> login(String username, String password) {
         return Uni.createFrom().item(users.stream()
-                .filter(u -> u.password().equals(password) && u.username().equals(username))
+                .filter(u -> u.getPassword().equals(password) && u.getUsername().equals(username))
                 .findFirst()
                 .map(u -> {
                     Session st = new Session(UUID.randomUUID(), u);
@@ -42,7 +42,7 @@ public class AuthService {
 
     public Uni<Boolean> isLoggedIn(String sessionToken) {
         return Uni.createFrom()
-                .item(validTokens.stream().anyMatch(s -> s.token().toString().equals(sessionToken)));
+                .item(validTokens.stream().anyMatch(s -> s.getToken().toString().equals(sessionToken)));
     }
 
     /**

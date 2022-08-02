@@ -28,7 +28,7 @@ public class End2EndTest {
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/sleep/"+s.token()+"/"+WAIT_TIME_IN_SECONDS)
+                .get("/sleep/"+s.getToken()+"/"+WAIT_TIME_IN_SECONDS)
                 .thenReturn();
 
         var timeDiff = (System.currentTimeMillis() - startTime)/1000;
@@ -81,7 +81,7 @@ public class End2EndTest {
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/sleep/" + s.token().toString() + "/asdf")
+                .get("/sleep/" + s.getToken().toString() + "/asdf")
                 .thenReturn();
 
         assertThat(sleeperEndpoint.statusCode(), equalTo(404));
