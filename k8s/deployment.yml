@@ -16,7 +16,7 @@ spec:
       containers:
         - name: test-environment
           image: ghcr.io/2023-da-ptt/ptt-test-environment:latest
-          imagePullPolicy: Always
+          #imagePullPolicy: Always
           resources:
             requests:
               memory: "64Mi"
