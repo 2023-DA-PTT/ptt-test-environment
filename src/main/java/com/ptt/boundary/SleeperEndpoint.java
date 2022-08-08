@@ -32,7 +32,7 @@ public class SleeperEndpoint {
                         return Response.status(403).build();
 
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(seconds * 1000);
                     } catch (InterruptedException e) {
                         return Response.status(500).build();
                     }
