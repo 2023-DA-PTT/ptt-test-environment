@@ -1,11 +1,17 @@
 package com.ptt.entity;
 
-import javax.ws.rs.FormParam;
+import java.io.File;
+
+import javax.ws.rs.core.MediaType;
+
+import org.jboss.resteasy.reactive.PartType;
+import org.jboss.resteasy.reactive.RestForm;
 
 public class MultipartFileForm {
-    @FormParam("file")
-    public byte[] file;
+    @RestForm("file")
+    @PartType(MediaType.APPLICATION_OCTET_STREAM)
+    public File file;
     
-    @FormParam("name")
+    @RestForm("name")
     public String name;
 }
