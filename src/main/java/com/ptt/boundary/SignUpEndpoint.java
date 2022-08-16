@@ -11,9 +11,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.logging.Logger;
+
 @Path("/sign-up")
 public class SignUpEndpoint {
     private final AuthService service;
+    private static final Logger LOG = Logger.getLogger(SignUpEndpoint.class);
 
     public SignUpEndpoint(AuthService service) {
         this.service = service;
@@ -23,6 +26,7 @@ public class SignUpEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Uni<Response> signUp(User dto) {
+        LOG.info("User tried to sign up: " + dto);
         return this.service.signUp(dto.getUsername(), dto.getPassword())
                 .onItem().transform(user -> Response.ok(user).build());
     }

@@ -11,9 +11,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.logging.Logger;
+
 @Path("/login")
 public class LoginEndpoint {
     private final AuthService service;
+    private static final Logger LOG = Logger.getLogger(LoginEndpoint.class);
 
     public LoginEndpoint(AuthService service) {
         this.service = service;
@@ -23,6 +26,7 @@ public class LoginEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Uni<Response> login(User user) {
+        LOG.info("User tried to log in: " + user);
         return service.login(user.getUsername(), user.getPassword())
                 .onItem()
                 .transform(
