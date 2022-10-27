@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ptt-test-environment
-  namespace: ptt
 spec:
   replicas: 1
   selector:
