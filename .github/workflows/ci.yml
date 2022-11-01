@@ -61,3 +61,5 @@ jobs:
         id: install
       - name: Upgrade Helm Deployment
         run: helm upgrade --install ptt-test-env ./helm --namespace ptt
+      - name: Rollout Restart Deployment
+        run: kubectl rollout restart deployment ptt-test-env --namespace=ptt
